@@ -20,9 +20,10 @@ import type { DaedalusSchema, DaedalusItemSchema } from '../types';
 interface Props {
   content: DaedalusSchema,
   onSelectItem: Function,
+  onDelete: Function,
 }
 
-function ListScreen({ onSelectItem, content }: Props) {
+function ListScreen({ onSelectItem, onDelete, content }: Props) {
 
   const { items: list } = content;
 
@@ -38,7 +39,7 @@ function ListScreen({ onSelectItem, content }: Props) {
               <ListItem
                 key={key}
                 secondaryAction={
-                  <IconButton edge="end" aria-label="delete">
+                  <IconButton onClick={() => onDelete(index)} edge="end" aria-label="delete">
                     <Delete />
                   </IconButton>
                 }

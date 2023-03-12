@@ -3,6 +3,7 @@ import { Container, Typography as Text, Box, Link, Button } from '@mui/material'
 import { cloneDeep } from 'lodash';
 import Edit from './screens/Edit';
 import List from './screens/List';
+import Confirm from './components/Confirm'
 import testJson from './testJson.json';
 import type { Screen, DaedalusSchema, DaedalusItemSchema } from './types';
 import { SCREENS } from './config';
@@ -15,13 +16,17 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState(initialScreen);
   const [content, setContent] = useState<DaedalusSchema>(initialState);
   const [editingIndex, setEditingIndex] = useState(-1);
+  const [deletingIndex, setDeletingIndex] = useState(-1);
   const setScreenList = () => setCurrentScreen(SCREENS.LIST);
   const setScreenEdit = () => setCurrentScreen(SCREENS.EDIT);
   const handleEdit = (newContentItem: DaedalusItemSchema) => {
-    setScreenList();
+    if (editingIndex === -1) {
+      return;
+    }
     const newContent: DaedalusSchema = cloneDeep(content);
     newContent.items[editingIndex] = newContentItem;
     setContent(newContent);
+    setScreenList();
     setEditingIndex(-1);
   }
   const handleSelectItem = (index: number) => {
@@ -33,7 +38,16 @@ export default function App() {
   }
 
   const handleDelete = (index: number) => {
-    console.log("index", index);
+    setDeletingIndex(index);
+  }
+
+  const handleConfirmDelete = () => {
+    setDeletingIndex(-1);
+    const newContent: DaedalusSchema = cloneDeep(content);
+    newContent.items.splice(deletingIndex, 1);
+    setContent(newContent);
+    setScreenList();
+    setEditingIndex(-1);
   }
 
   return (
@@ -65,10 +79,19 @@ export default function App() {
           <List
             onSelectItem={handleSelectItem}
             content={content}
+            onDelete={handleDelete}
           />
         )
       }
-
+      {
+        (deletingIndex > -1) && (
+          <Confirm
+            onConfirm={handleConfirmDelete}
+            onCancel={() => {setDeletingIndex(-1)}}
+            content="Are you sure you want to delete this item?"
+          />
+        )
+      }
     </Container>
   );
 }

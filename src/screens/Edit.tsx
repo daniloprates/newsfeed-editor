@@ -74,7 +74,6 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
 
   return (
     <div>
-
       <Stack
         spacing={2}
         direction="row"
