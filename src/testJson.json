@@ -1,0 +1,152 @@
+{
+  "updatedAt": 1673859600000,
+  "items": [
+    {
+      "title": {
+        "en-US": "Daedalus 5.2.0 now available",
+        "ja-JP": "Daedalus 5.2.0現在配信中"
+      },
+      "content": {
+        "en-US": "The Daedalus 5.2.0 Preview release supports Cardano node version 1.35.4 and Cardano wallet version 2022.12.14. The environment has been re-spun to include this update.\n\nThis update also adds Byron wallet tracking capability and aggregates similar RAM sizes for easier data analysis.\n\n[Delete the contents of the state directory](https://iohk.zendesk.com/hc/en-us/articles/360039511853) to access this update.\n\nPlease read the [release notes](https://iohk.zendesk.com/hc/en-us/articles/14431839009049) for more information.",
+        "ja-JP": "Daedalus 5.2.0 Previewリリースでは、Cardanoノードバージョン1.35.4とCardanoウォレットバージョン2022.12.14をサポートしています。この更新を含めるために、本環境はリスピンされました。\n\n本更新ではまた、Byronウォレットの追跡機能を追加し、類似のRAMサイズをまとめてデータ分析を簡易化しています。\n\n[ステータスディレクトリのコンテンツを削除](https://iohk.zendesk.com/hc/ja/articles/360039511853)して、本更新にアクセスしてください。\n\n詳細は[リリースノート](https://iohk.zendesk.com/hc/ja/articles/14431839009049)をご覧ください。"
+      },
+      "target": {
+        "daedalusVersion": ">=2.3.0 <5.2.0",
+        "platforms":["win32","linux"]
+      },
+      "action": {
+        "label": {
+          "en-US": "",
+          "ja-JP": ""
+        },
+        "url": {
+          "en-US": "",
+          "ja-JP": ""
+        }
+      },
+      "date": 1673856000000,
+      "type": "software-update",
+      "softwareUpdate": {
+        "linux": {
+          "version": "5.2.0",
+          "hash": "83939846b8dcf58487e47a0d7d51a13b06491b3c543f495b39b9c839a9f13963",
+          "url": "https://updates-cardano-preview.s3.amazonaws.com/daedalus-5.2.0-preview-22505-x86_64-linux.bin"
+        },
+        "darwin": {
+          "version": "5.2.0",
+          "hash": "b3cafa56b291e4ec7bc8e707ed46048c655db9b05b7a058ab95a6c1af7579c69",
+          "url": "https://updates-cardano-preview.s3.amazonaws.com/daedalus-5.2.0-preview-22505-x86_64-darwin.pkg"
+        },
+        "win32": {
+          "version": "5.2.0",
+          "hash": "6d49e448c6709f62be1aad44893c56205ee4fe55dff9dca5a2046f097032eb6b",
+          "url": "https://updates-cardano-preview.s3.amazonaws.com/daedalus-5.2.0-preview-22505-x86_64-windows.exe"
+        }
+      }
+    },
+    {
+      "title": {
+        "en-US": "Daedalus 5.2.0 - Release notes",
+        "ja-JP": "Daedalus 5.2.0 - リリースノート"
+      },
+      "content": {
+        "en-US": "The Daedalus 5.2.0 Preview release supports Cardano node version 1.35.4 and Cardano wallet version 2022.12.14. The environment has been re-spun to include this update.\n\nThis update also adds Byron wallet tracking capability and aggregates similar RAM sizes for easier data analysis.\n\n[Delete the contents of the state directory](https://iohk.zendesk.com/hc/en-us/articles/360039511853) to access this update.",
+        "ja-JP": "Daedalus 5.2.0 Previewリリースでは、Cardanoノードバージョン1.35.4とCardanoウォレットバージョン2022.12.14をサポートしています。この更新を含めるために、本環境はリスピンされました。\n\n本更新ではまた、Byronウォレットの追跡機能を追加し、類似のRAMサイズをまとめてデータ分析を簡易化しています。\n\n[ステータスディレクトリのコンテンツを削除](https://iohk.zendesk.com/hc/ja/articles/360039511853)して、本更新にアクセスしてください。"
+      },
+      "target": {
+        "daedalusVersion": "5.2.0",
+        "platforms":["darwin","win32","linux"]
+      },
+      "action": {
+        "label": {
+          "en-US": "Release notes",
+          "ja-JP": "リリースノート"
+        },
+        "url": {
+          "en-US": "https://iohk.zendesk.com/hc/en-us/articles/14431839009049",
+          "ja-JP": "https://iohk.zendesk.com/hc/ja/articles/14431839009049"
+        }
+      },
+      "date": 1673859600000,
+      "type": "announcement"
+    },
+    {
+      "title": {
+        "en-US": "Get test tokens from the faucet",
+        "ja-JP": "フォーセットでテストトークンを入手できます"
+      },
+      "content": {
+        "en-US": "Testcoin native tokens and test ada are available from the Cardano testnet faucet for testing your Daedalus testnet wallet. These tokens have no actual value, but are useful for experimenting with Cardano testnet features and trying out the native tokens user experience.",
+        "ja-JP": "Daedalusのテストネット用ウォレットをテストするためのTestcoinネイティブトークンとテストADAが、Cardanoテストネットフォーセットで入手できます。これらのトークンには実際の価値はありませんが、Cardanoテストネットの機能やネイティブトークンの使用感を試してみることができます。"
+      },
+      "target": {
+        "daedalusVersion": ">=4.0.0-FC1",
+        "platforms":["darwin","win32","linux"]
+      },
+      "action": {
+        "label": {
+          "en-US": "Cardano testnet faucet",
+          "ja-JP": "Cardanoテストネットフォーセット"
+        },
+        "url": {
+          "en-US": "https://docs.cardano.org/cardano-testnet/tools/faucet",
+          "ja-JP": "https://docs.cardano.org/cardano-testnet/tools/faucet"
+        }
+      },
+      "date": 1614686400000,
+      "type": "announcement"
+    },
+    {
+      "title": {
+        "en-US": "Stay safe from scammers - some important advice",
+        "ja-JP": "詐欺にご注意ください - 重要なアドバイス"
+      },
+      "content": {
+        "en-US": "Read the post on how to stay safe and spot potential Daedalus and Cardano scams.",
+        "ja-JP": "安全性に注意する方法、そして、DaedalusとCardanoの詐欺の可能性を見抜く方法についての記事をご覧ください。"
+      },
+      "target": {
+        "daedalusVersion": ">=3.0.0",
+        "platforms":["darwin","win32","linux"]
+      },
+      "action": {
+        "label": {
+          "en-US": "Read the post",
+          "ja-JP": "記事を読む(英語のみ)"
+        },
+        "url": {
+          "en-US": "https://www.reddit.com/r/cardano/comments/lccorg/psa_there_is_no_such_thing_as_cardano_giveaways/",
+          "ja-JP": "https://www.reddit.com/r/cardano/comments/lccorg/psa_there_is_no_such_thing_as_cardano_giveaways/"
+        }
+      },
+      "date": 1613757600000,
+      "type": "announcement"
+    },
+    {
+      "title": {
+        "en-US": "Daedalus system requirements",
+        "ja-JP": "Daedalusシステム要件"
+      },
+      "content": {
+        "en-US": "Cardano's growth means more users, transactions, and applications. Daedalus must also adapt to accommodate this expansion.\nThe minimum system specification recommended for Daedalus is under constant review. Check the link below often for the latest requirements.",
+        "ja-JP": "Cardanoの成長は、ユーザー、トランザクション、アプリケーションの増加を意味します。Daedalusもまた、この拡大を許容すべく適応させる必要があります。\nDaedalusの推奨最小システム仕様は定期的に見直されています。下記リンクで最新のシステム要件を確認してください。"
+      },
+      "target": {
+        "daedalusVersion": ">=4.4.1",
+        "platforms":["darwin","win32","linux"]
+      },
+      "action": {
+        "label": {
+          "en-US": "Daedalus system requirements",
+          "ja-JP": "Daedalusシステム要件"
+        },
+        "url": {
+          "en-US": "https://iohk.zendesk.com/hc/en-us/articles/360010496553",
+          "ja-JP": "https://iohk.zendesk.com/hc/ja/articles/360010496553"
+        }
+      },
+      "date": 1653987600000,
+      "type": "announcement"
+    }
+  ]
+}
