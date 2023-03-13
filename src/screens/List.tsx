@@ -25,11 +25,12 @@ interface Props {
   content?: DaedalusSchema,
   onSelectItem: Function,
   onDelete: Function,
+  onImportJson: Function,
 }
 
 const exampleJsonUrl = 'https://github.com/daniloprates/newsfeed-editor/blob/master/src/testJson.json';
 
-function ListScreen({ onSelectItem, onDelete, content }: Props) {
+function ListScreen({ onSelectItem, onDelete, content, onImportJson }: Props) {
 
   const { items: list = [] } = content || {};
 
@@ -88,7 +89,7 @@ function ListScreen({ onSelectItem, onDelete, content }: Props) {
       {
         !list.length && (
           <Box sx={{ textAlign: 'center' }}>
-            <Text variant="h4"><p>Import Json to start editing</p></Text>
+            <Text variant="h4"><p><Link href="#" onClick={() => onImportJson()}>Import Json</Link> to start editing</p></Text>
             <p>You can find an <Link href={exampleJsonUrl} target="_blank">example here</Link>.</p>
           </Box>
         )

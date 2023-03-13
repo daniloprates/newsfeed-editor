@@ -131,6 +131,7 @@ export default function App() {
               onSelectItem={handleSelectItem}
               content={content}
               onDelete={handleDelete}
+              onImportJson={setScreenImport}
             />
           )
         }
