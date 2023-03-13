@@ -11,6 +11,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Stack,
   TextField,
   Typography as Text,
 } from '@mui/material';
@@ -30,6 +31,19 @@ function ListScreen({ onSelectItem, onDelete, content }: Props) {
 
   return (
     <div>
+      <Stack
+        spacing={2}
+        direction="row"
+        sx={{
+          border: 1,
+          borderColor: 'divider',
+          padding: 3,
+          textAlign: 'right'
+        }}
+      >
+        <Box sx={{ flexGrow: 1 }} />
+        <Button variant="contained" disabled>New item (soon)</Button>
+      </Stack>
       <List>
         {
           !!list.length && list.map((item, index) => {
@@ -37,28 +51,28 @@ function ListScreen({ onSelectItem, onDelete, content }: Props) {
             const date = new Date(item.date)
             const key = title.replaceAll(' ', '');
             return (
-              <ListItem
-                key={key}
-                secondaryAction={
-                  <IconButton onClick={() => onDelete(index)} edge="end" aria-label="delete">
-                    <Delete />
-                  </IconButton>
-                }
-              >
-                <ListItemButton
-                  onClick={() => onSelectItem(index)}
+                <ListItem
+                  key={key}
+                  secondaryAction={
+                    <IconButton onClick={() => onDelete(index)} edge="end" aria-label="delete">
+                      <Delete />
+                    </IconButton>
+                  }
                 >
-                  <ListItemAvatar>
-                    <Avatar>
-                      <Article />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={title}
-                    secondary={date.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                  />
-                </ListItemButton>
-              </ListItem>
+                  <ListItemButton
+                    onClick={() => onSelectItem(index)}
+                  >
+                    <ListItemAvatar>
+                      <Avatar>
+                        <Article />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={title}
+                      secondary={date.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    />
+                  </ListItemButton>
+                </ListItem>
             );
           })
         }
