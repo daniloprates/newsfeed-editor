@@ -15,7 +15,7 @@ const initialScreen: Screen = SCREENS.LIST;
 
 export default function App() {
 
-  const [currentScreen, setCurrentScreen] = useState(initialScreen);
+  const [currentScreen, setCurrentScreen] = useState();
   const [content, setContent] = useState<DaedalusSchema>(initialState);
   const [editingIndex, setEditingIndex] = useState(-1);
   const [deletingIndex, setDeletingIndex] = useState(-1);
