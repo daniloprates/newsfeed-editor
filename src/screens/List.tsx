@@ -44,7 +44,7 @@ function ListScreen({ onSelectItem, onDelete, content }: Props) {
           }}
           >
             <Box sx={{ flexGrow: 1 }} />
-            <Button variant="contained" disabled>New item (soon)</Button>
+            <Button variant="contained" onClick={() => onSelectItem()}>New item</Button>
           </Stack>
         )
       }

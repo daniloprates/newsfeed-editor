@@ -16,7 +16,7 @@ const initialScreen: Screen = SCREENS.LIST;
 export default function App() {
 
   const [currentScreen, setCurrentScreen] = useState(initialScreen);
-  const [content, setContent] = useState<DaedalusSchema>();
+  const [content, setContent] = useState<DaedalusSchema>(initialState);
   const [editingIndex, setEditingIndex] = useState(-1);
   const [deletingIndex, setDeletingIndex] = useState(-1);
   const setScreenList = () => setCurrentScreen(SCREENS.LIST);
@@ -28,21 +28,23 @@ export default function App() {
     setScreenList();
   }
 
-  const handleEdit = (newContentItem: DaedalusItemSchema) => {
-    if (!content || editingIndex === -1) {
+  const handleSaveItem = (newContentItem: DaedalusItemSchema) => {
+    if (!content) {
       return;
     }
+    const index = editingIndex > -1
+      ? editingIndex
+      : content.items.length;
     const newContent: DaedalusSchema = cloneDeep(content);
-    newContent.items[editingIndex] = newContentItem;
+    newContent.items[index] = newContentItem;
     setContent(newContent);
     setScreenList();
     setEditingIndex(-1);
   }
-  const handleSelectItem = (index: number) => {
-    if (!content || index < 0 || index > content.items.length - 1) {
-      return;
+  const handleSelectItem = (index?: number) => {
+    if (index) {
+      setEditingIndex(index);
     }
-    setEditingIndex(index);
     setScreenEdit();
   }
 
@@ -108,7 +110,7 @@ export default function App() {
         {
           currentScreen === SCREENS.EDIT && (
             <Edit
-              onEdit={handleEdit}
+              onSave={handleSaveItem}
               content={content}
               editingIndex={editingIndex}
               onCancel={setScreenList}

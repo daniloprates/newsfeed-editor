@@ -1,6 +1,6 @@
+import { emptyItem } from './config';
 
 export const getTitle = (item: { title: { 'en-US': string }}) => item.title['en-US'];
-
 
 export const getType = (value: any) => {
   const type = typeof value;
@@ -11,7 +11,6 @@ export const getType = (value: any) => {
     return type;
   }
 }
-
 
 export const parseJson = (content: string) => {
   try {
@@ -29,7 +28,6 @@ export const parseJson = (content: string) => {
   }
 };
 
-
 export const readFileAsync = (file: File) => {
   return new Promise((resolve, reject) => {
     let reader = new FileReader();
@@ -40,3 +38,8 @@ export const readFileAsync = (file: File) => {
     reader.readAsText(file);
   })
 };
+
+export const getEmptyItem = () => ({
+  ...emptyItem,
+  date: new Date().getTime(),
+});

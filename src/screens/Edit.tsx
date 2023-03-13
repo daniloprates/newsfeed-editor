@@ -14,38 +14,30 @@ import {
   Radio
 } from '@mui/material';
 import { ArrowBackIos, DeleteForever } from '@mui/icons-material';
-import { getType } from '../utils';
+import { getType, getEmptyItem } from '../utils';
 import type { DaedalusSchema, DaedalusItemSchema } from '../types';
 
  interface Props {
-  onEdit: Function,
+  onSave: Function,
   onDelete: Function,
   onCancel: Function,
   editingIndex: number,
   content?: DaedalusSchema,
  }
 
-function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
+function Edit({ onSave, onCancel, editingIndex, content, onDelete }: Props) {
 
-  if (!content || !content.items || !content.items[editingIndex]) {
-    return (
-      <div>
-        Something went wrong.
-        <Button
-          onClick={() => onCancel()}
-        >
-          Go back
-        </Button>
-      </div>
-    );
-  };
+  const newEditingItem = content && editingIndex > -1
+    ? content.items[editingIndex]
+    : getEmptyItem();
 
-  const [editingItem, setEditingItem] = useState<DaedalusItemSchema>(cloneDeep(content.items[editingIndex]));
+  const [editingItem, setEditingItem] =
+    useState<DaedalusItemSchema>(cloneDeep(newEditingItem));
 
   const getValue = (path: string) => get(editingItem, path);
 
   const getIsChecked = (path: string, id: string) => {
-    const value = getValue(path);
+    const value = getValue(path) || [];
     return value.includes(id);
   }
 
@@ -72,6 +64,45 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
     setEditingItem(newItem);
   }
 
+  const titleEn = getValue('title.en-US');
+  const titleJa = getValue('title.ja-JP');
+  const contentEn = getValue('content.en-US');
+  const contentJa = getValue('content.ja-JP');
+  const version = getValue('target.daedalusVersion');
+  const actionLabelEn = getValue('action.label.en-US');
+  const actionaLabelJa = getValue('action.label.ja-JP');
+  const actionUrlEn = getValue('action.url.en-US');
+  const actionUrlJa = getValue('action.url.ja-JP');
+  const softwareUpdateLinuxVersion = getValue('softwareUpdate.linux.version');
+  const softwareUpdateLinuxHash = getValue('softwareUpdate.linux.hash');
+  const softwareUpdateLinuxUrl = getValue('softwareUpdate.linux.url');
+  const softwareUpdateDarwinVersion = getValue('softwareUpdate.darwin.version');
+  const softwareUpdateDarwinHash = getValue('softwareUpdate.darwin.hash');
+  const softwareUpdateDarwinUrl = getValue('softwareUpdate.darwin.url');
+  const softwareUpdateWin32Version = getValue('softwareUpdate.win32.version');
+  const softwareUpdateWin32Hash = getValue('softwareUpdate.win32.hash');
+  const softwareUpdateWin32Url = getValue('softwareUpdate.win32.url');
+
+  // TODO: proper validattion
+  const isDisable =
+    !titleEn ||
+    !titleJa ||
+    !contentEn ||
+    !contentJa ||
+    !version ||
+    !editingItem.target.platforms.length ||
+    editingItem.type === 'software-update' && (
+      !softwareUpdateLinuxVersion ||
+      !softwareUpdateLinuxHash ||
+      !softwareUpdateLinuxUrl ||
+      !softwareUpdateDarwinVersion ||
+      !softwareUpdateDarwinHash ||
+      !softwareUpdateDarwinUrl ||
+      !softwareUpdateWin32Version ||
+      !softwareUpdateWin32Hash ||
+      !softwareUpdateWin32Url
+    );
+
   return (
     <div>
       <Stack
@@ -88,25 +119,25 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
             <Button onClick={() => onCancel()}>Cancel</Button>
           </Grid>
           <Grid  item xs={9} sx={{textAlign: 'right'}}>
-            <Button variant="contained" onClick={() => onEdit(editingItem)}>Save</Button>
+            <Button variant="contained" disabled={isDisable} onClick={() => onSave(editingItem)}>Save</Button>
           </Grid>
         </Grid>
       </Stack>
-      <Text variant="h4"><p>{getValue('title.en-US')}</p></Text>
+      <Text variant="h4"><p>{titleEn || 'New Item'}</p></Text>
       <Text variant="h5"><p>Title</p></Text>
       <TextField
         name="title.en-US"
         label="Title (EN)"
         fullWidth
         onChange={editItem}
-        value={getValue('title.en-US')}
+        value={titleEn}
       />
       <TextField
         name="title.ja-JP"
         label="Title (JA)"
         fullWidth
         onChange={editItem}
-        value={getValue('title.ja-JP')}
+        value={titleJa}
       />
       <Text variant="h5"><p>Content</p></Text>
       <TextField
@@ -116,7 +147,7 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
         multiline
         rows={6}
         onChange={editItem}
-        value={getValue('content.en-US')}
+        value={contentEn}
       />
       <TextField
         name="content.ja-JP"
@@ -125,7 +156,7 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
         multiline
         rows={6}
         onChange={editItem}
-        value={getValue('content.ja-JP')}
+        value={contentJa}
       />
       <Text variant="h5"><p>Target</p></Text>
       <TextField
@@ -134,7 +165,7 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
         placeholder=">=2.3.0 <5.2.0"
         fullWidth
         onChange={editItem}
-        value={getValue('target.daedalusVersion')}
+        value={version}
       />
       <Text variant="h6"><p>Platforms</p></Text>
       <FormGroup>
@@ -147,25 +178,25 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
         name="action.label.en-US"
         label="Label (EN)"
         fullWidth
-        value={getValue('action.label.en-US')}
+        value={actionLabelEn}
       />
       <TextField
         name="action.label.ja-JP"
         label="Label (JA)"
         fullWidth
-        value={getValue('action.label.ja-JP')}
+        value={actionaLabelJa}
       />
       <TextField
         name="action.url.en-US"
         label="URL (EN)"
         fullWidth
-        value={getValue('action.url.en-US')}
+        value={actionUrlEn}
       />
       <TextField
         name="action.url.ja-JP"
         label="URL (JA)"
         fullWidth
-        value={getValue('action.url.ja-JP')}
+        value={actionUrlJa}
       />
       <Text variant="h5"><p>Type</p></Text>
       <RadioGroup
@@ -191,21 +222,21 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
               label="Version"
               fullWidth
               onChange={editItem}
-              value={getValue('softwareUpdate.linux.version')}
+              value={softwareUpdateLinuxVersion}
             />
             <TextField
               name="softwareUpdate.linux.hash"
               label="Hash"
               fullWidth
               onChange={editItem}
-              value={getValue('softwareUpdate.linux.hash')}
+              value={softwareUpdateLinuxHash}
             />
             <TextField
               name="softwareUpdate.linux.url"
               label="Version"
               fullWidth
               onChange={editItem}
-              value={getValue('softwareUpdate.linux.url')}
+              value={softwareUpdateLinuxUrl}
             />
 
             <Text variant="h6"><p>MacOs</p></Text>
@@ -214,21 +245,21 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
               label="Version"
               fullWidth
               onChange={editItem}
-              value={getValue('softwareUpdate.darwin.version')}
+              value={softwareUpdateDarwinVersion}
             />
             <TextField
               name="softwareUpdate.darwin.hash"
               label="Hash"
               fullWidth
               onChange={editItem}
-              value={getValue('softwareUpdate.darwin.hash')}
+              value={softwareUpdateDarwinHash}
             />
             <TextField
               name="softwareUpdate.darwin.url"
               label="Version"
               fullWidth
               onChange={editItem}
-              value={getValue('softwareUpdate.darwin.url')}
+              value={softwareUpdateDarwinUrl}
             />
 
             <Text variant="h6"><p>Linux</p></Text>
@@ -237,21 +268,21 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
               label="Version"
               fullWidth
               onChange={editItem}
-              value={getValue('softwareUpdate.win32.version')}
+              value={softwareUpdateWin32Version}
             />
             <TextField
               name="softwareUpdate.win32.hash"
               label="Hash"
               fullWidth
               onChange={editItem}
-              value={getValue('softwareUpdate.win32.hash')}
+              value={softwareUpdateWin32Hash}
             />
             <TextField
               name="softwareUpdate.win32.url"
               label="Version"
               fullWidth
               onChange={editItem}
-              value={getValue('softwareUpdate.win32.url')}
+              value={softwareUpdateWin32Url}
             />
 
           </div>
@@ -273,11 +304,10 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
             <Button onClick={() => onDelete(editingIndex)}><DeleteForever /> Delete item</Button>
           </Grid>
           <Grid  item xs={9} sx={{textAlign: 'right'}}>
-            <Button variant="contained" onClick={() => onEdit(editingItem)}>Save</Button>
+            <Button variant="contained" disabled={isDisable} onClick={() => onSave(editingItem)}>Save</Button>
           </Grid>
         </Grid>
       </Stack>
-      {/*<pre>{JSON.stringify(editingItem, null, 2)}</pre>*/}
     </div>
   );
 }
