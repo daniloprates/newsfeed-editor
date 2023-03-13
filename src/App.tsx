@@ -40,7 +40,7 @@ export default function App() {
     setEditingIndex(-1);
   }
   const handleSelectItem = (index?: number) => {
-    if (index) {
+    if (typeof index === 'number') {
       setEditingIndex(index);
     }
     setScreenEdit();
