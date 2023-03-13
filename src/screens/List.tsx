@@ -31,19 +31,23 @@ function ListScreen({ onSelectItem, onDelete, content }: Props) {
 
   return (
     <div>
-      <Stack
-        spacing={2}
-        direction="row"
-        sx={{
-          border: 1,
-          borderColor: 'divider',
-          padding: 3,
-          textAlign: 'right'
-        }}
-      >
-        <Box sx={{ flexGrow: 1 }} />
-        <Button variant="contained" disabled>New item (soon)</Button>
-      </Stack>
+      {
+        !!list.length && (
+          <Stack
+            spacing={2}
+            direction="row"
+            sx={{
+              border: 1,
+              borderColor: 'divider',
+              padding: 3,
+              textAlign: 'right'
+          }}
+          >
+            <Box sx={{ flexGrow: 1 }} />
+            <Button variant="contained" disabled>New item (soon)</Button>
+          </Stack>
+        )
+      }
       <List>
         {
           !!list.length && list.map((item, index) => {
