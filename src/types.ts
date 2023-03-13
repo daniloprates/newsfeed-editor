@@ -1,5 +1,6 @@
 export type Screen =
   | 'LIST'
+  | 'IMPORT'
   | 'EDIT';
 
 export type DaedalusItemType =
@@ -48,3 +49,8 @@ export interface DaedalusItemSchema {
       }
     }
 };
+
+export type Confirmation =
+  | 'CANCEL'
+  | 'SUBMIT'
+  | undefined;

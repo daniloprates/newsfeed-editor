@@ -1,37 +1,38 @@
 import React, { useState } from 'react';
 import {
-  Typography as Text,
-  Box,
-  TextField,
-  Button,
   Avatar,
+  Box,
+  Button,
+  Grid,
   IconButton,
   List,
   ListItem,
-  ListItemButton,
   ListItemAvatar,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
+  TextField,
+  Typography as Text,
 } from '@mui/material';
 import { ArrowBackIos, Delete, Article, Reorder, Add } from '@mui/icons-material';
 import { getTitle } from '../utils';
 import type { DaedalusSchema, DaedalusItemSchema } from '../types';
 
 interface Props {
-  content: DaedalusSchema,
+  content?: DaedalusSchema,
   onSelectItem: Function,
   onDelete: Function,
 }
 
 function ListScreen({ onSelectItem, onDelete, content }: Props) {
 
-  const { items: list } = content;
+  const { items: list = [] } = content || {};
 
   return (
     <div>
       <List>
         {
-          list.map((item, index) => {
+          !!list.length && list.map((item, index) => {
             const title = getTitle(item);
             const date = new Date(item.date)
             const key = title.replaceAll(' ', '');
@@ -62,6 +63,11 @@ function ListScreen({ onSelectItem, onDelete, content }: Props) {
           })
         }
       </List>
+      {
+        !list.length && (
+          <Text variant="h4" align="center"><p>Import Json to start editing</p></Text>
+        )
+      }
     </div>
   );
 }

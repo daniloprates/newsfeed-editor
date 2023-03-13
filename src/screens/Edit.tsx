@@ -92,7 +92,8 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
           </Grid>
         </Grid>
       </Stack>
-      <Text variant="h4"><p>Title</p></Text>
+      <Text variant="h4"><p>{getValue('title.en-US')}</p></Text>
+      <Text variant="h5"><p>Title</p></Text>
       <TextField
         name="title.en-US"
         label="Title (EN)"
@@ -107,7 +108,7 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
         onChange={editItem}
         value={getValue('title.ja-JP')}
       />
-      <Text variant="h4"><p>Content</p></Text>
+      <Text variant="h5"><p>Content</p></Text>
       <TextField
         name="content.en-US"
         label="Content (EN)"
@@ -126,7 +127,7 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
         onChange={editItem}
         value={getValue('content.ja-JP')}
       />
-      <Text variant="h4"><p>Target</p></Text>
+      <Text variant="h5"><p>Target</p></Text>
       <TextField
         name="target.daedalusVersion"
         label="Daedalus Version"
@@ -141,7 +142,7 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
         <FormControlLabel control={<Checkbox checked={getIsChecked('target.platforms', 'darwin')} onChange={(event: any) => editCheckbox(event)} name="target.platforms" value="darwin" />} label="MacOs" />
         <FormControlLabel control={<Checkbox checked={getIsChecked('target.platforms', 'linux')} onChange={(event: any) => editCheckbox(event)} name="target.platforms" value="linux" />} label="Linux" />
       </FormGroup>
-      <Text variant="h4"><p>Action</p></Text>
+      <Text variant="h5"><p>Action</p></Text>
       <TextField
         name="action.label.en-US"
         label="Label (EN)"
@@ -166,7 +167,7 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
         fullWidth
         value={getValue('action.url.ja-JP')}
       />
-      <Text variant="h4"><p>Type</p></Text>
+      <Text variant="h5"><p>Type</p></Text>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
         value={editingItem.type}
@@ -183,8 +184,8 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
       {
         editingItem.type === 'software-update' && (
           <div>
-            <Text variant="h4"><p>Software Update</p></Text>
-            <Text variant="h5"><p>Windows</p></Text>
+            <Text variant="h5"><p>Software Update</p></Text>
+            <Text variant="h6"><p>Windows</p></Text>
             <TextField
               name="softwareUpdate.linux.version"
               label="Version"
@@ -207,7 +208,7 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
               value={getValue('softwareUpdate.linux.url')}
             />
 
-            <Text variant="h5"><p>MacOs</p></Text>
+            <Text variant="h6"><p>MacOs</p></Text>
             <TextField
               name="softwareUpdate.darwin.version"
               label="Version"
@@ -230,7 +231,7 @@ function Edit({ onEdit, onCancel, editingIndex, content, onDelete }: Props) {
               value={getValue('softwareUpdate.darwin.url')}
             />
 
-            <Text variant="h5"><p>Linux</p></Text>
+            <Text variant="h6"><p>Linux</p></Text>
             <TextField
               name="softwareUpdate.win32.version"
               label="Version"
