@@ -30,10 +30,12 @@ export default function App() {
     if (!content) {
       return;
     }
+    const updatedAt = new Date().getTime();
     const index = editingIndex > -1
       ? editingIndex
       : content.items.length;
     const newContent: DaedalusSchema = cloneDeep(content);
+    newContent.updatedAt = updatedAt;
     newContent.items[index] = newContentItem;
     setContent(newContent);
     setScreenList();
