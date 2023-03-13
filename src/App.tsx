@@ -73,6 +73,11 @@ export default function App() {
     node.remove();
   }
 
+  const handleCancelEditing = () => {
+    setEditingIndex(-1);
+    setScreenList();
+  }
+
   return (
     <div>
       <CssBaseline />
@@ -111,7 +116,7 @@ export default function App() {
               onSave={handleSaveItem}
               content={content}
               editingIndex={editingIndex}
-              onCancel={setScreenList}
+              onCancel={handleCancelEditing}
               onDelete={handleDelete}
             />
           )

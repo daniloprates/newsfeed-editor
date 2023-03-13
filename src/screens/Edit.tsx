@@ -26,7 +26,6 @@ import type { DaedalusSchema, DaedalusItemSchema } from '../types';
  }
 
 function Edit({ onSave, onCancel, editingIndex, content, onDelete }: Props) {
-  console.log("editingIndex", editingIndex);
 
   const newEditingItem = content && editingIndex > -1
     ? content.items[editingIndex]
