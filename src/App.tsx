@@ -6,17 +6,15 @@ import List from './screens/List';
 import Import from './screens/Import';
 import Confirm from './components/Confirm'
 import ElevationScroll from './components/ElevationScroll'
-import testJson from './testJson.json';
 import type { Screen, DaedalusSchema, DaedalusItemSchema } from './types';
 import { SCREENS } from './config';
 
-const initialState = testJson as DaedalusSchema;
 const initialScreen: Screen = SCREENS.LIST;
 
 export default function App() {
 
-  const [currentScreen, setCurrentScreen] = useState();
-  const [content, setContent] = useState<DaedalusSchema>(initialState);
+  const [currentScreen, setCurrentScreen] = useState(initialScreen);
+  const [content, setContent] = useState<DaedalusSchema>();
   const [editingIndex, setEditingIndex] = useState(-1);
   const [deletingIndex, setDeletingIndex] = useState(-1);
   const setScreenList = () => setCurrentScreen(SCREENS.LIST);
