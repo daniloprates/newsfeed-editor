@@ -127,14 +127,14 @@ function Edit({ onSave, onCancel, editingIndex, content, onDelete }: Props) {
       <Text variant="h5"><p>Title</p></Text>
       <TextField
         name="title.en-US"
-        label="Title (EN)"
+        label="Title (English)"
         fullWidth
         onChange={editItem}
         value={titleEn}
       />
       <TextField
         name="title.ja-JP"
-        label="Title (JA)"
+        label="Title (Japanese)"
         fullWidth
         onChange={editItem}
         value={titleJa}
@@ -142,7 +142,7 @@ function Edit({ onSave, onCancel, editingIndex, content, onDelete }: Props) {
       <Text variant="h5"><p>Content</p></Text>
       <TextField
         name="content.en-US"
-        label="Content (EN)"
+        label="Content (English)"
         fullWidth
         multiline
         rows={6}
@@ -151,7 +151,7 @@ function Edit({ onSave, onCancel, editingIndex, content, onDelete }: Props) {
       />
       <TextField
         name="content.ja-JP"
-        label="Content (JA)"
+        label="Content (Japanese)"
         fullWidth
         multiline
         rows={6}
@@ -176,25 +176,25 @@ function Edit({ onSave, onCancel, editingIndex, content, onDelete }: Props) {
       <Text variant="h5"><p>Action</p></Text>
       <TextField
         name="action.label.en-US"
-        label="Label (EN)"
+        label="Label (English)"
         fullWidth
         value={actionLabelEn}
       />
       <TextField
         name="action.label.ja-JP"
-        label="Label (JA)"
+        label="Label (Japanese)"
         fullWidth
         value={actionaLabelJa}
       />
       <TextField
         name="action.url.en-US"
-        label="URL (EN)"
+        label="URL (English)"
         fullWidth
         value={actionUrlEn}
       />
       <TextField
         name="action.url.ja-JP"
-        label="URL (JA)"
+        label="URL (Japanese)"
         fullWidth
         value={actionUrlJa}
       />

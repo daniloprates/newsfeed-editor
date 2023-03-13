@@ -3,8 +3,10 @@ import {
   Avatar,
   Box,
   Button,
+  Container,
   Grid,
   IconButton,
+  Link,
   List,
   ListItem,
   ListItemAvatar,
@@ -24,6 +26,8 @@ interface Props {
   onSelectItem: Function,
   onDelete: Function,
 }
+
+const exampleJsonUrl = 'https://github.com/daniloprates/newsfeed-editor/blob/master/src/testJson.json';
 
 function ListScreen({ onSelectItem, onDelete, content }: Props) {
 
@@ -83,7 +87,10 @@ function ListScreen({ onSelectItem, onDelete, content }: Props) {
       </List>
       {
         !list.length && (
-          <Text variant="h4" align="center"><p>Import Json to start editing</p></Text>
+          <Box sx={{ textAlign: 'center' }}>
+            <Text variant="h4"><p>Import Json to start editing</p></Text>
+            <p>You can find an <Link href={exampleJsonUrl} target="_blank">example here</Link>.</p>
+          </Box>
         )
       }
     </div>
