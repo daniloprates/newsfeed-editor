@@ -1,24 +1,23 @@
 import React from 'react';
 import {
   Button,
-  Grid
+  Grid,
 } from '@mui/material';
 
 interface Props {
-  onSubmit: Function,
-  onCancel: Function,
   isDisabled: boolean,
+  onCancel: Function,
+  onSubmit: Function,
 }
 
 function ImportFooter({
-  onSubmit,
-  onCancel,
   isDisabled,
+  onCancel,
+  onSubmit,
 }: Props) {
 
   return (
     <div>
-
       <Grid
         container
         justifyContent="right"

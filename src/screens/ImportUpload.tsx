@@ -1,41 +1,48 @@
 // @t s-nocheck
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Typography as Text,
   TextField,
 } from '@mui/material';
 import ImportFooter from './ImportFooter';
 import { readFileAsync } from '../utils';
+import type { DaedalusSchema } from '../types';
 
 interface Props {
-  onUpdateStringValue: Function,
   hasError: boolean,
-  errorMessage: string,
-  onSubmit: Function,
   onCancel: Function,
-  onResetError: Function,
+  onSubmit: Function,
+  onUpdateStringValue: Function,
+  parsedValue?: DaedalusSchema,
 }
 
 function ImportUpload({
-  onUpdateStringValue,
   hasError,
-  onResetError,
   onCancel,
+  onSubmit,
+  onUpdateStringValue,
+  parsedValue,
 }: Props) {
 
   const [file, setFile] = useState<File>();
 
   const handleSelectFileToUpload = (event: any) => {
     setFile(event.target.files[0]);
-    onResetError();
+    onUpdateStringValue();
   }
 
   const handleConfirmSubmit = async () => {
     if (file) {
       const strJson = await readFileAsync(file);
-      await onUpdateStringValue(strJson);
+      onUpdateStringValue(strJson);
     }
   }
+
+  useEffect(() => {
+    if (parsedValue) {
+      onSubmit();
+    }
+  }, [parsedValue]);
 
   return (
     <div>

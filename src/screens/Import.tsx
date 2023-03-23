@@ -6,7 +6,7 @@ import {
   Tabs,
   Tab,
 } from '@mui/material';
-import { parseJson } from '../utils';
+import { parseJson, isJsonDaedalusCompatible } from '../utils';
 import type { DaedalusSchema } from '../types';
 
 import ImportUpload from './ImportUpload';
@@ -20,30 +20,46 @@ interface Props {
 
 function Import({ onImport, onCancel }: Props) {
 
-  const [parsedValue, setParsedValue] = useState({});
+  const [parsedValue, setParsedValue] = useState<DaedalusSchema>();
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [currentTabIndex, setCurrentTabIndex] = useState<number>(0);
 
   const resetError = () => {
     setHasError(false);
-    setErrorMessage('')
+    setErrorMessage('');
+    setParsedValue(undefined);
   }
 
-  const handleUpdateStringValue = (value: string) => {
-    const { success: isValid, errorMessage, parsed } = parseJson(value);
+  const handleUpdateStringValue = async (value?: string) => {
+    if (!value) {
+      resetError();
+      return;
+    }
+    const { success, errorMessage, parsed } = parseJson(value);
     const newContent = parsed as DaedalusSchema;
-    setErrorMessage(errorMessage || '');
-    setHasError(!value || !isValid);
-    if (isValid && value) {
-      setParsedValue(newContent);
-      onImport(newContent);
+    let hasError = false;
+    let newErrorMessage = '';
+    if (!success) {
+      hasError = true;
+      newErrorMessage = String(errorMessage);
+    } else if (!isJsonDaedalusCompatible(newContent)) {
+      hasError = true;
+      newErrorMessage = 'This json is not in the Daedalus newsfeed format';
+    }
+    await setHasError(hasError);
+    await setErrorMessage(newErrorMessage);
+    if (!hasError) {
+      await setParsedValue(parsed);
     } else {
-      setParsedValue({});
+      await setParsedValue(undefined);
     }
   }
 
   const handleSubmit = () => {
+    if (!parsedValue) {
+      return;
+    }
     onImport(parsedValue);
   };
 
@@ -67,25 +83,26 @@ function Import({ onImport, onCancel }: Props) {
       {
         currentTabIndex === 0 && (
           <ImportUpload
-            onUpdateStringValue={handleUpdateStringValue}
             hasError={hasError}
-            errorMessage={errorMessage}
-            onSubmit={handleSubmit}
             onCancel={onCancel}
-            onResetError={resetError}
+            onSubmit={handleSubmit}
+            onUpdateStringValue={handleUpdateStringValue}
+            parsedValue={parsedValue}
           />
         )
       }
       {
         currentTabIndex === 1 && (
           <ImportPaste
-            onImport={onImport}
+            hasError={hasError}
             onCancel={onCancel}
+            onSubmit={handleSubmit}
+            onUpdateStringValue={handleUpdateStringValue}
           />
         )
       }
       <Box sx={{ mb: 2, mt: 2 }}>
-        <p>{hasError && <Text color="error">{errorMessage}</Text>}</p>
+        {hasError && <Text color="error">{errorMessage}</Text>}
       </Box>
     </div>
   );
