@@ -8,6 +8,7 @@ import Confirm from './components/Confirm'
 import ElevationScroll from './components/ElevationScroll'
 import type { Screen, DaedalusSchema, DaedalusItemSchema } from './types';
 import { SCREENS } from './config';
+import example from './example.json';
 
 const initialScreen: Screen = SCREENS.LIST;
 
@@ -24,6 +25,11 @@ export default function App() {
   const handleImport = (newContent: DaedalusSchema) => {
     setContent(newContent);
     setScreenList();
+  }
+
+  const handleUseExample = () => {
+    const newContent = example as DaedalusSchema;
+    setContent(newContent);
   }
 
   const handleSaveItem = (newContentItem: DaedalusItemSchema) => {
@@ -53,7 +59,7 @@ export default function App() {
   }
 
   const handleConfirmDelete = () => {
-    if (!content || editingIndex === -1) {
+    if (!content || deletingIndex === -1) {
       return;
     }
     setDeletingIndex(-1);
@@ -91,7 +97,9 @@ export default function App() {
         >
           <Toolbar>
             <Text variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Newsfeed Editor
+              <Link href="#" onClick={() => setScreenList()} underline="none" color="white">
+                Newsfeed Editor
+              </Link>
             </Text>
             <div>
             <ButtonGroup variant="text" color="inherit">
@@ -139,6 +147,7 @@ export default function App() {
               content={content}
               onDelete={handleDelete}
               onImportJson={setScreenImport}
+              onUseExample={handleUseExample}
             />
           )
         }

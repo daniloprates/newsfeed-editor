@@ -26,11 +26,10 @@ interface Props {
   onSelectItem: Function,
   onDelete: Function,
   onImportJson: Function,
+  onUseExample: Function,
 }
 
-const exampleJsonUrl = 'https://github.com/daniloprates/newsfeed-editor/blob/master/src/testJson.json';
-
-function ListScreen({ onSelectItem, onDelete, content, onImportJson }: Props) {
+function ListScreen({ onSelectItem, onDelete, content, onImportJson, onUseExample }: Props) {
 
   const { items: list = [] } = content || {};
 
@@ -90,7 +89,7 @@ function ListScreen({ onSelectItem, onDelete, content, onImportJson }: Props) {
         !list.length && (
           <Box sx={{ textAlign: 'center' }}>
             <Text variant="h4"><p><Link href="#" onClick={() => onImportJson()}>Import Json</Link> to start editing</p></Text>
-            <p>You can find an <Link href={exampleJsonUrl} target="_blank">example here</Link>.</p>
+            <p>You can <Link href="#" onClick={() => onUseExample()}>use an example JSON</Link>.</p>
           </Box>
         )
       }

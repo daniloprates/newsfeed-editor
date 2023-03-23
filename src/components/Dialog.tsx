@@ -36,10 +36,11 @@ function DialogComponent({open, title, content, actions}: Props) {
       </DialogContent>
       <DialogActions>
         {
-          !!actions && actions.map(({label, action, color}) => (
+          !!actions && actions.map(({label, action, color}, index) => (
             <Button
               onClick={() => action()}
               color={color}
+              key={index}
             >
               {label}
             </Button>
