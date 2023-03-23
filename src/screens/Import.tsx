@@ -7,8 +7,7 @@ import {
   Tab,
 } from '@mui/material';
 import { parseJson } from '../utils';
-import { CONFIRMATIONS } from '../config';
-import type { Confirmation, DaedalusSchema } from '../types';
+import type { DaedalusSchema } from '../types';
 
 import ImportUpload from './ImportUpload';
 import ImportPaste from './ImportPaste';
@@ -24,11 +23,9 @@ function Import({ onImport, onCancel }: Props) {
   const [parsedValue, setParsedValue] = useState({});
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [confirmation, setConfirmation] = useState<Confirmation>();
   const [currentTabIndex, setCurrentTabIndex] = useState<number>(0);
 
   const resetError = () => {
-    setConfirmation(undefined);
     setHasError(false);
     setErrorMessage('')
   }
@@ -43,30 +40,12 @@ function Import({ onImport, onCancel }: Props) {
       onImport(newContent);
     } else {
       setParsedValue({});
-      setConfirmation(undefined);
     }
   }
 
   const handleSubmit = () => {
-    setConfirmation(CONFIRMATIONS.SUBMIT);
-  };
-
-  const confirmSubmit = () => {
     onImport(parsedValue);
-  }
-
-  const handleCancel = () => {
-    setConfirmation(CONFIRMATIONS.CANCEL);
   };
-
-  const confirmCancel = () => {
-    setConfirmation(undefined);
-    onCancel();
-  };
-
-  const dontConfirm = () => {
-    setConfirmation(undefined);
-  }
 
   const setTabProps = (index: number) => (
     {
@@ -88,15 +67,11 @@ function Import({ onImport, onCancel }: Props) {
       {
         currentTabIndex === 0 && (
           <ImportUpload
-            confirmation={confirmation}
             onUpdateStringValue={handleUpdateStringValue}
             hasError={hasError}
             errorMessage={errorMessage}
             onSubmit={handleSubmit}
-            onConfirmSubmit={confirmSubmit}
-            onCancel={handleCancel}
-            onConfirmCancel={confirmCancel}
-            onDontConfirm={dontConfirm}
+            onCancel={onCancel}
             onResetError={resetError}
           />
         )
@@ -105,7 +80,7 @@ function Import({ onImport, onCancel }: Props) {
         currentTabIndex === 1 && (
           <ImportPaste
             onImport={onImport}
-            onCancel={confirmCancel}
+            onCancel={onCancel}
           />
         )
       }

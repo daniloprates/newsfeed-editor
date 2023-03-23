@@ -12,7 +12,6 @@ import type { DaedalusSchema } from '../types';
 interface Props {
   onImport: Function,
   onCancel: Function,
-
 }
 
 function ImportPaste({ onImport, onCancel }: Props) {

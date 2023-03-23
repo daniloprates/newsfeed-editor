@@ -3,12 +3,6 @@ export type Screen =
   | 'IMPORT'
   | 'EDIT';
 
-
-export type Confirmation =
-  | 'CANCEL'
-  | 'SUBMIT'
-  | undefined;
-
 export type Platform =
   | 'darwin'
   | 'win32'

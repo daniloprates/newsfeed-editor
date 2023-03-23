@@ -1,15 +1,10 @@
-import type { Screen, Confirmation, DaedalusItemSchema } from './types';
+import type { Screen, DaedalusItemSchema } from './types';
 
 export const SCREENS: Record<string, Screen> = {
   LIST: 'LIST',
   IMPORT: 'IMPORT',
   EDIT: 'EDIT',
 };
-
-export const CONFIRMATIONS: Record<string, Confirmation> = {
-  CANCEL: 'CANCEL',
-  SUBMIT: 'SUBMIT',
-}
 
 export const emptyItem: DaedalusItemSchema = {
   title: {

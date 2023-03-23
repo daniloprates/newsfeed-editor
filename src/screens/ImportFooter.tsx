@@ -3,28 +3,17 @@ import {
   Button,
   Grid
 } from '@mui/material';
-import type { Confirmation } from '../types';
-
-import ImportConfirmations from './ImportConfirmations';
 
 interface Props {
   onSubmit: Function,
   onCancel: Function,
   isDisabled: boolean,
-  confirmation?: Confirmation,
-  onConfirmCancel?: Function,
-  onConfirmSubmit?: Function,
-  onDontConfirm?: Function,
 }
 
 function ImportFooter({
   onSubmit,
   onCancel,
   isDisabled,
-  confirmation,
-  onConfirmCancel,
-  onConfirmSubmit,
-  onDontConfirm
 }: Props) {
 
   return (
@@ -51,19 +40,6 @@ function ImportFooter({
           </Button>
         </Grid>
       </Grid>
-      {
-        !!confirmation &&
-        !!onConfirmCancel &&
-        !!onConfirmSubmit &&
-        !!onDontConfirm && (
-          <ImportConfirmations
-            confirmation={confirmation}
-            onConfirmCancel={onConfirmCancel}
-            onConfirmSubmit={onConfirmSubmit}
-            onDontConfirm={onDontConfirm}
-          />
-        )
-      }
     </div>
   );
 }

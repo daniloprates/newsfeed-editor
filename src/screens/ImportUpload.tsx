@@ -6,28 +6,21 @@ import {
 } from '@mui/material';
 import ImportFooter from './ImportFooter';
 import { readFileAsync } from '../utils';
-import type { Confirmation } from '../types';
 
 interface Props {
-  confirmation: Confirmation,
   onUpdateStringValue: Function,
   hasError: boolean,
   errorMessage: string,
   onSubmit: Function,
-  onConfirmSubmit: Function,
   onCancel: Function,
-  onConfirmCancel: Function,
-  onDontConfirm: Function,
   onResetError: Function,
 }
 
 function ImportUpload({
-  confirmation,
   onUpdateStringValue,
   hasError,
-  onConfirmCancel,
-  onDontConfirm,
-  onResetError
+  onResetError,
+  onCancel,
 }: Props) {
 
   const [file, setFile] = useState<File>();
@@ -55,12 +48,8 @@ function ImportUpload({
        />
       <ImportFooter
         onSubmit={handleConfirmSubmit}
-        onCancel={onConfirmCancel}
+        onCancel={onCancel}
         isDisabled={hasError || !file}
-        confirmation={confirmation}
-        onConfirmCancel={onConfirmCancel}
-        onConfirmSubmit={handleConfirmSubmit}
-        onDontConfirm={onDontConfirm}
       />
     </div>
   );
