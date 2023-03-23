@@ -1,37 +1,14 @@
 // @t s-nocheck
-import React, { useState } from 'react';
-import { get } from 'lodash';
-import {
-  Typography as Text,
-  Box,
-  TextField,
-  Button,
-  Tabs,
-  Tab,
-  Grid
-} from '@mui/material';
+import React from 'react';
 import Confirm from '../components/Confirm';
-import { parseJson } from '../utils';
 import { CONFIRMATIONS } from '../config';
 import type { Confirmation } from '../types';
-
-import ImportUpload from './ImportUpload';
-import ImportPaste from './ImportPaste';
 
 interface Props {
   confirmation: Confirmation,
   onConfirmCancel: Function,
   onConfirmSubmit: Function,
   onDontConfirm: Function,
-}
-
-const jsonToList = (content: string) => {
-  try {
-    const jsContent = JSON.parse(content);
-    return jsContent.items || [];
-  } catch (err: any) {
-    return [];
-  }
 }
 
 function ImportConfirmations({

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { get, set, cloneDeep } from 'lodash';
 import {
   Typography as Text,
-  Box,
   TextField,
   Button,
   FormGroup,
@@ -13,8 +12,8 @@ import {
   RadioGroup,
   Radio
 } from '@mui/material';
-import { ArrowBackIos, DeleteForever } from '@mui/icons-material';
-import { getType, getEmptyItem } from '../utils';
+import { DeleteForever } from '@mui/icons-material';
+import { getEmptyItem } from '../utils';
 import type { DaedalusSchema, DaedalusItemSchema } from '../types';
 
  interface Props {

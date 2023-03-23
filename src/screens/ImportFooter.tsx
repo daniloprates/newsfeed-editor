@@ -1,22 +1,10 @@
-// @t s-nocheck
-import React, { useState } from 'react';
-import { get } from 'lodash';
+import React from 'react';
 import {
-  Typography as Text,
-  Box,
-  TextField,
   Button,
-  Tabs,
-  Tab,
   Grid
 } from '@mui/material';
-import Confirm from '../components/Confirm';
-import { parseJson } from '../utils';
-import { CONFIRMATIONS } from '../config';
 import type { Confirmation } from '../types';
 
-import ImportUpload from './ImportUpload';
-import ImportPaste from './ImportPaste';
 import ImportConfirmations from './ImportConfirmations';
 
 interface Props {
@@ -27,15 +15,6 @@ interface Props {
   onConfirmCancel?: Function,
   onConfirmSubmit?: Function,
   onDontConfirm?: Function,
-}
-
-const jsonToList = (content: string) => {
-  try {
-    const jsContent = JSON.parse(content);
-    return jsContent.items || [];
-  } catch (err: any) {
-    return [];
-  }
 }
 
 function ImportFooter({

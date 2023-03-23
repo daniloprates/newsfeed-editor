@@ -3,22 +3,16 @@ export type Screen =
   | 'IMPORT'
   | 'EDIT';
 
-export type DaedalusItemType =
-  | 'incident'
-  | 'alert'
-  | 'announcement'
-  | 'info'
-  | 'software-update';
+
+export type Confirmation =
+  | 'CANCEL'
+  | 'SUBMIT'
+  | undefined;
 
 export type Platform =
   | 'darwin'
   | 'win32'
   | 'linux';
-
-export interface DaedalusSchema {
-  updatedAt: number,
-  items: DaedalusItemSchema[]
-};
 
 export type Language =
     | 'en-US'
@@ -28,19 +22,26 @@ export type MultiLanguageObj  = {
   [key in Language]: string
 };
 
+export type DaedalusItemType =
+  | 'incident'
+  | 'alert'
+  | 'announcement'
+  | 'info'
+  | 'software-update';
+
 export interface DaedalusItemSchema {
     title: MultiLanguageObj,
     content: MultiLanguageObj,
     target: {
       'daedalusVersion': string,
-      'platforms': Platform[]
+      'platforms': Platform[],
     },
     action: {
       label: MultiLanguageObj,
       url: MultiLanguageObj
     },
     date: number,
-    type: string,
+    type: DaedalusItemType,
     softwareUpdate?: {
       [key in Platform]: {
         version: string,
@@ -50,7 +51,7 @@ export interface DaedalusItemSchema {
     }
 };
 
-export type Confirmation =
-  | 'CANCEL'
-  | 'SUBMIT'
-  | undefined;
+export interface DaedalusSchema {
+  updatedAt: number,
+  items: DaedalusItemSchema[],
+};

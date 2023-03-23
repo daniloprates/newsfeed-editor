@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Avatar,
   Box,
   Button,
-  Container,
-  Grid,
   IconButton,
   Link,
   List,
   ListItem,
   ListItemAvatar,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
   Stack,
-  TextField,
   Typography as Text,
 } from '@mui/material';
-import { ArrowBackIos, Delete, Article, Reorder, Add } from '@mui/icons-material';
+import { Delete, Article } from '@mui/icons-material';
 import { getTitle } from '../utils';
-import type { DaedalusSchema, DaedalusItemSchema } from '../types';
+import type { DaedalusSchema } from '../types';
 
 interface Props {
   content?: DaedalusSchema,

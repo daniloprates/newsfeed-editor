@@ -2,11 +2,10 @@
 import React, { useState } from 'react';
 import {
   Typography as Text,
-  Button,
   TextField,
 } from '@mui/material';
 import ImportFooter from './ImportFooter';
-import { parseJson, readFileAsync } from '../utils';
+import { readFileAsync } from '../utils';
 import type { Confirmation } from '../types';
 
 interface Props {
@@ -42,12 +41,7 @@ function ImportUpload({
     onResetError();
   }
 
-  const handleSubmit = () => {
-
-  }
-
   const handleConfirmSubmit = async () => {
-    let reader = new FileReader();
     if (file) {
       const strJson = await readFileAsync(file);
       await onUpdateStringValue(strJson);

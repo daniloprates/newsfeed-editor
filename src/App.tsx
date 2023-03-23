@@ -1,20 +1,19 @@
-import React, { useState, ChangeEvent } from 'react';
-import { CssBaseline, AppBar, Toolbar, Container, Typography as Text, Box, Link, Button, ButtonGroup } from '@mui/material';
+import React, { useState } from 'react';
+import { CssBaseline, AppBar, Toolbar, Container, Typography as Text, Link, Button, ButtonGroup } from '@mui/material';
 import { cloneDeep } from 'lodash';
 import Edit from './screens/Edit';
 import List from './screens/List';
 import Import from './screens/Import';
 import Confirm from './components/Confirm'
-import ElevationScroll from './components/ElevationScroll'
 import type { Screen, DaedalusSchema, DaedalusItemSchema } from './types';
 import { SCREENS } from './config';
 import example from './example.json';
 
-const initialScreen: Screen = SCREENS.LIST;
+const INITIAL_SCREEN: Screen = SCREENS.LIST;
 
 export default function App() {
 
-  const [currentScreen, setCurrentScreen] = useState(initialScreen);
+  const [currentScreen, setCurrentScreen] = useState(INITIAL_SCREEN);
   const [content, setContent] = useState<DaedalusSchema>();
   const [editingIndex, setEditingIndex] = useState(-1);
   const [deletingIndex, setDeletingIndex] = useState(-1);

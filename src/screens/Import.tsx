@@ -1,16 +1,11 @@
 // @t s-nocheck
 import React, { useState } from 'react';
-import { get } from 'lodash';
 import {
   Typography as Text,
   Box,
-  TextField,
-  Button,
   Tabs,
   Tab,
-  Grid
 } from '@mui/material';
-import Confirm from '../components/Confirm';
 import { parseJson } from '../utils';
 import { CONFIRMATIONS } from '../config';
 import type { Confirmation, DaedalusSchema } from '../types';
@@ -24,23 +19,12 @@ interface Props {
   content?: DaedalusSchema,
 }
 
-const jsonToList = (content: string) => {
-  try {
-    const jsContent = JSON.parse(content);
-    return jsContent.items || [];
-  } catch (err: any) {
-    return [];
-  }
-}
-
 function Import({ onImport, onCancel, content }: Props) {
 
-  const [inputValue, setInputValue] = useState('');
   const [parsedValue, setParsedValue] = useState({});
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [confirmation, setConfirmation] = useState<Confirmation>();
-  const [file, setFile] = useState<File>();
   const [currentTabIndex, setCurrentTabIndex] = useState<number>(0);
 
   const resetError = () => {
@@ -62,39 +46,6 @@ function Import({ onImport, onCancel, content }: Props) {
       setConfirmation(undefined);
     }
   }
-
-  // const setValue = (value: string) => {
-  //   if (!value) {
-  //     setHasError(false);
-  //     setErrorMessage('newErrorMessage');
-  //     setParsedValue(undefined);
-  //     return;
-  //   }
-  //   setInputValue(value);
-  //   const { success, errorMessage, parsed } = parseJson(value);
-  //   const newContent = parsed as DaedalusSchema;
-  //   let hasError = false;
-  //   let newErrorMessage = '';
-  //   if (!success) {
-  //     hasError = true;
-  //     newErrorMessage = String(errorMessage);
-  //   } else if (
-  //     !value ||
-  //     typeof newContent !== 'object' ||
-  //     !newContent.updatedAt ||
-  //     !Array.isArray(newContent.items)
-  //   ) {
-  //     hasError = true;
-  //     newErrorMessage = 'This json is not in the Daedalus newsfeed format';
-  //   }
-  //   setHasError(hasError);
-  //   setErrorMessage(newErrorMessage);
-  //   if (!hasError) {
-  //     setParsedValue(parsed);
-  //   } else {
-  //     setParsedValue(undefined);
-  //   }
-  // }
 
   const handleSubmit = () => {
     setConfirmation(CONFIRMATIONS.SUBMIT);
