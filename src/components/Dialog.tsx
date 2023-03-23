@@ -21,7 +21,7 @@ interface Props {
   actions: ActionItem[]
 }
 
-function DialogComponent({open, title, content, actions}: Props) {
+function DialogComponent({title, content, actions}: Props) {
 
   return (
     <Dialog

@@ -19,7 +19,7 @@ interface Props {
   content?: DaedalusSchema,
 }
 
-function Import({ onImport, onCancel, content }: Props) {
+function Import({ onImport, onCancel }: Props) {
 
   const [parsedValue, setParsedValue] = useState({});
   const [hasError, setHasError] = useState(false);
@@ -80,7 +80,7 @@ function Import({ onImport, onCancel, content }: Props) {
         Import Json
       </Text>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 5, mt: 5 }}>
-        <Tabs value={currentTabIndex} onChange={(ev, newView) => setCurrentTabIndex(newView)} aria-label="basic tabs example">
+        <Tabs value={currentTabIndex} onChange={(_, newView) => setCurrentTabIndex(newView)} aria-label="basic tabs example">
           <Tab label="Upload" {...setTabProps(0)} />
           <Tab label="Paste" {...setTabProps(1)} />
         </Tabs>

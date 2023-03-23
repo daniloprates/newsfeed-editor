@@ -25,10 +25,6 @@ function ImportUpload({
   confirmation,
   onUpdateStringValue,
   hasError,
-  errorMessage,
-  onSubmit,
-  onConfirmSubmit,
-  onCancel,
   onConfirmCancel,
   onDontConfirm,
   onResetError
